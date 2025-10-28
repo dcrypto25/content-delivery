@@ -20,7 +20,7 @@ profiles:
 
   # BALANCED MODE - Best quality/cost ratio (~$40/month)
   balanced:
-    image_provider: "gemini"     # $0.005/image
+    image_provider: "replicate"  # $0.04/image FLUX Pro
     video_provider: "runway"     # $0.28/video
     tts_provider: "elevenlabs"   # $5/month
     image_quantity: 70

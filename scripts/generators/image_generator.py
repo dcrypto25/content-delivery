@@ -48,6 +48,8 @@ class ImageGenerator:
     PROVIDER_COSTS = {
         'gemini': 0.005,      # $0.005 per image
         'replicate': 0.0055,  # $0.0055 per image (FLUX Schnell)
+        'replicate_pro': 0.04, # $0.04 per image (FLUX Pro - PHOTOREALISTIC)
+        'replicate_dev': 0.025, # $0.025 per image (FLUX Dev - High quality)
         'stability': 0.02,    # $0.02 per image (if needed)
     }
 
@@ -86,7 +88,7 @@ class ImageGenerator:
 
             logger.info("✓ Gemini initialized")
 
-        elif self.provider == 'replicate':
+        elif self.provider in ['replicate', 'replicate_dev', 'replicate_pro']:
             if replicate is None:
                 raise ImportError("replicate not installed. Run: pip install replicate")
 
@@ -95,7 +97,14 @@ class ImageGenerator:
                 raise ValueError("REPLICATE_API_TOKEN not set")
 
             os.environ['REPLICATE_API_TOKEN'] = api_token
-            logger.info("✓ Replicate initialized")
+
+            # Log which quality level
+            quality_map = {
+                'replicate': 'Fast (Schnell)',
+                'replicate_dev': 'High Quality (Dev)',
+                'replicate_pro': 'Photorealistic (Pro)'
+            }
+            logger.info(f"✓ Replicate initialized - {quality_map.get(self.provider, 'Unknown')}")
 
         else:
             raise ValueError(f"Unknown provider: {self.provider}")
@@ -119,7 +128,7 @@ class ImageGenerator:
         try:
             if self.provider == 'gemini':
                 image_data = self._generate_gemini(prompt, size)
-            elif self.provider == 'replicate':
+            elif self.provider in ['replicate', 'replicate_dev', 'replicate_pro']:
                 image_data = self._generate_replicate(prompt, size)
             else:
                 raise ValueError(f"Unsupported provider: {self.provider}")
@@ -163,29 +172,67 @@ class ImageGenerator:
         return self._generate_replicate(prompt, size)
 
     def _generate_replicate(self, prompt: str, size: str) -> bytes:
-        """Generate image using Replicate (FLUX Schnell - FASTEST & CHEAPEST)"""
+        """Generate image using Replicate (FLUX models)"""
 
         # Parse size
         width, height = map(int, size.split('x'))
 
-        # FLUX Schnell is the fastest model (4 steps)
-        model = os.getenv('REPLICATE_IMAGE_MODEL', 'black-forest-labs/flux-schnell')
+        # Determine which FLUX model to use based on provider setting
+        model_map = {
+            'replicate': 'black-forest-labs/flux-schnell',      # Fast, cheap
+            'replicate_dev': 'black-forest-labs/flux-dev',      # High quality
+            'replicate_pro': 'black-forest-labs/flux-1.1-pro'   # PHOTOREALISTIC
+        }
+
+        model = model_map.get(self.provider, 'black-forest-labs/flux-dev')
+
+        # Override with env var if set
+        if os.getenv('REPLICATE_IMAGE_MODEL'):
+            model = os.getenv('REPLICATE_IMAGE_MODEL')
 
         logger.info(f"Calling Replicate: {model}")
 
-        output = replicate.run(
-            model,
-            input={
-                "prompt": prompt,
+        # Enhance prompt for photorealism
+        enhanced_prompt = self._enhance_prompt_for_realism(prompt)
+
+        # Model-specific parameters
+        if 'schnell' in model:
+            # Fast model (4 steps, no guidance)
+            input_params = {
+                "prompt": enhanced_prompt,
                 "width": width,
                 "height": height,
                 "num_outputs": 1,
-                "num_inference_steps": 4,  # Schnell is optimized for 4 steps
-                "guidance_scale": 0,  # Schnell doesn't use guidance
+                "num_inference_steps": 4,
                 "output_format": "jpg",
-                "output_quality": 90
+                "output_quality": 95
             }
-        )
+        elif 'pro' in model:
+            # Pro model (best quality)
+            input_params = {
+                "prompt": enhanced_prompt,
+                "width": width,
+                "height": height,
+                "num_outputs": 1,
+                "output_format": "jpg",
+                "output_quality": 95,
+                "safety_tolerance": 2,  # Less restrictive for fitness content
+                "prompt_upsampling": True  # Better prompt understanding
+            }
+        else:
+            # Dev model (balanced)
+            input_params = {
+                "prompt": enhanced_prompt,
+                "width": width,
+                "height": height,
+                "num_outputs": 1,
+                "num_inference_steps": 28,  # More steps = better quality
+                "guidance_scale": 3.5,      # Moderate guidance
+                "output_format": "jpg",
+                "output_quality": 95
+            }
+
+        output = replicate.run(model, input=input_params)
 
         # Download image
         if output and len(output) > 0:
@@ -196,6 +243,41 @@ class ImageGenerator:
             return response.content
 
         raise Exception("No output from Replicate")
+
+    def _enhance_prompt_for_realism(self, prompt: str) -> str:
+        """Enhance prompt with photorealism keywords"""
+
+        # Keywords that dramatically improve realism
+        realism_keywords = [
+            "photorealistic",
+            "shot on Canon EOS R5",
+            "85mm f/1.4 lens",
+            "natural skin texture",
+            "real photography",
+            "ultra detailed",
+            "sharp focus",
+            "studio lighting",
+            "professional photography",
+            "8K resolution",
+            "lifelike",
+            "highly detailed facial features"
+        ]
+
+        # Check if prompt already has realism keywords
+        if not any(kw.lower() in prompt.lower() for kw in ["photorealistic", "photography", "canon", "shot on"]):
+            # Add photorealism prefix
+            prompt = f"Professional photorealistic photography, shot on Canon EOS R5, 85mm lens: {prompt}"
+
+        # Add natural skin texture emphasis for people
+        if any(word in prompt.lower() for word in ["person", "woman", "man", "athlete", "people", "trainer"]):
+            if "skin" not in prompt.lower():
+                prompt = f"{prompt}, natural skin texture, realistic pores and details"
+
+        # Ensure we specify NOT to be digital art/illustration
+        if "not" not in prompt.lower():
+            prompt = f"{prompt}, NOT digital art, NOT illustration, NOT painting, NOT anime"
+
+        return prompt
 
     def generate_batch(
         self,
@@ -320,7 +402,9 @@ def main():
     import json
 
     parser = argparse.ArgumentParser(description="TrainerApp.AI Image Generator")
-    parser.add_argument('--provider', type=str, choices=['gemini', 'replicate'], help='Generation provider')
+    parser.add_argument('--provider', type=str,
+                       choices=['gemini', 'replicate', 'replicate_dev', 'replicate_pro'],
+                       help='Generation provider (replicate_dev=best quality, replicate_pro=photorealistic)')
     parser.add_argument('--prompt', type=str, help='Single prompt to generate')
     parser.add_argument('--batch', type=str, help='Path to JSON file with prompts')
     parser.add_argument('--size', type=str, default='1080x1920', help='Image size')
