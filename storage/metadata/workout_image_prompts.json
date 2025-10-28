@@ -1,0 +1,115 @@
+{
+  "generated_at": "[\n  {\n    \"prompt\": \"Cinematic 4K: A diverse group of three friends of different body types (one curvy, one athletic, one slim) doing a high-energy HIIT workout in a spacious outdoor park during golden hour. The TrainerApp.AI interface is visible on their smartphones showing a workout timer. Text overlay says 'Push Your Limits Together!', professional photography\",\n    \"variant_id\": \"wor_001\",\n    \"theme\": \"workout\",\n    \"tags\": [\n      \"HIIT\",\n      \"outdoor\",\n      \"friends\"\n    ],\n    \"platform\": \"both\",\n    \"estimated_virality\": \"high\",\n    \"diversity_attributes\": {\n      \"body_type\": \"curvy, athletic, slim\",\n      \"ethnicity\": \"mixed\",\n      \"age_range\": \"20-30\",\n      \"gender\": \"female\"\n    },\n    \"location\": \"outdoor park\",\n    \"time_of_day\": \"evening\",\n    \"energy_level\": \"high\",\n    \"utm_link\": \"https://trainerapp.ai?utm_source=instagram&utm_medium=social&utm_campaign=workout_auto\"\n  },\n  {\n    \"prompt\": \"Magazine editorial: An older man in his 60s with a strong build performing strength training with dumbbells at home surrounded by plants and warm lighting. The TrainerApp.AI app shows his personalized workout plan on a tablet and the text overlay states 'It\\u2019s Never Too Late to Start!'., high resolution\",\n    \"variant_id\": \"wor_002\",\n    \"theme\": \"workout\",\n    \"tags\": [\n      \"strength training\",\n      \"home workout\"\n    ],\n    \"platform\": \"instagram\",\n    \"estimated_virality\": \"medium\",\n    \"diversity_attributes\": {\n      \"body_type\": \"strong\",\n      \"ethnicity\": \"Caucasian\",\n      \"age_range\": \"60-70\",\n      \"gender\": \"male\"\n    },\n    \"location\": \"home\",\n    \"time_of_day\": \"afternoon\",\n    \"energy_level\": \"medium\",\n    \"utm_link\": \"https://trainerapp.ai?utm_source=instagram&utm_medium=social&utm_campaign=workout_auto\"\n  },\n  {\n    \"prompt\": \"Magazine editorial: A young Black woman in her 20s energetically leading a cardio dance class in a bright, mirrored studio with colorful lights. The TrainerApp.AI interface shows her heart rate and calories burned during the session. Motivational text overlay reads 'Dance Your Way to Fitness!', sharp focus\",\n    \"variant_id\": \"wor_003\",\n    \"theme\": \"workout\",\n    \"tags\": [\n      \"cardio\",\n      \"dance\",\n      \"studio\"\n    ],\n    \"platform\": \"tiktok\",\n    \"estimated_virality\": \"high\",\n    \"diversity_attributes\": {\n      \"body_type\": \"athletic\",\n      \"ethnicity\": \"Black\",\n      \"age_range\": \"20-30\",\n      \"gender\": \"female\"\n    },\n    \"location\": \"fitness studio\",\n    \"time_of_day\": \"morning\",\n    \"energy_level\": \"high\",\n    \"utm_link\": \"https://trainerapp.ai?utm_source=tiktok&utm_medium=social&utm_campaign=workout_auto\"\n  },\n  {\n    \"prompt\": \"Magazine editorial: A middle-aged Asian woman in her 40s practicing yoga on a calm beach at sunrise, focusing on her breathing and stability. The TrainerApp.AI interface is visible on her smartwatch tracking her mindfulness. Text overlay reads 'Find Your Zen Every Morning!'., professional photography\",\n    \"variant_id\": \"wor_004\",\n    \"theme\": \"workout\",\n    \"tags\": [\n      \"yoga\",\n      \"outdoor\",\n      \"mindfulness\"\n    ],\n    \"platform\": \"both\",\n    \"estimated_virality\": \"medium\",\n    \"diversity_attributes\": {\n      \"body_type\": \"average\",\n      \"ethnicity\": \"Asian\",\n      \"age_range\": \"40-50\",\n      \"gender\": \"female\"\n    },\n    \"location\": \"beach\",\n    \"time_of_day\": \"sunrise\",\n    \"energy_level\": \"low\",\n    \"utm_link\": \"https://trainerapp.ai?utm_source=instagram&utm_medium=social&utm_campaign=workout_auto\"\n  },\n  {\n    \"prompt\": \"Ultra-realistic studio: A group of diverse individuals (varied body types, ethnic backgrounds) engaged in a boot camp workout at a city rooftop during sunset. The TrainerApp.AI interface displays workout achievements. The overlay text says 'Stronger Together, No Matter Where You Are!'., cinematic lighting\",\n    \"variant_id\": \"wor_005\",\n    \"theme\": \"workout\",\n    \"tags\": [\n      \"boot camp\",\n      \"outdoor\",\n      \"community\"\n    ],\n    \"platform\": \"tiktok\",\n    \"estimated_virality\": \"high\",\n    \"diversity_attributes\": {\n      \"body_type\": \"mixed\",\n      \"ethnicity\": \"mixed\",\n      \"age_range\": \"25-40\",\n      \"gender\": \"mixed\"\n    },\n    \"location\": \"city rooftop\",\n    \"time_of_day\": \"sunset\",\n    \"energy_level\": \"high\",\n    \"utm_link\": \"https://trainerapp.ai?utm_source=tiktok&utm_medium=social&utm_campaign=workout_auto\"\n  }\n]",
+  "count": 5,
+  "prompts": [
+    {
+      "prompt": "Cinematic 4K: A diverse group of three friends of different body types (one curvy, one athletic, one slim) doing a high-energy HIIT workout in a spacious outdoor park during golden hour. The TrainerApp.AI interface is visible on their smartphones showing a workout timer. Text overlay says 'Push Your Limits Together!', professional photography",
+      "variant_id": "wor_001",
+      "theme": "workout",
+      "tags": [
+        "HIIT",
+        "outdoor",
+        "friends"
+      ],
+      "platform": "both",
+      "estimated_virality": "high",
+      "diversity_attributes": {
+        "body_type": "curvy, athletic, slim",
+        "ethnicity": "mixed",
+        "age_range": "20-30",
+        "gender": "female"
+      },
+      "location": "outdoor park",
+      "time_of_day": "evening",
+      "energy_level": "high",
+      "utm_link": "https://trainerapp.ai?utm_source=instagram&utm_medium=social&utm_campaign=workout_auto"
+    },
+    {
+      "prompt": "Magazine editorial: An older man in his 60s with a strong build performing strength training with dumbbells at home surrounded by plants and warm lighting. The TrainerApp.AI app shows his personalized workout plan on a tablet and the text overlay states 'It\u2019s Never Too Late to Start!'., high resolution",
+      "variant_id": "wor_002",
+      "theme": "workout",
+      "tags": [
+        "strength training",
+        "home workout"
+      ],
+      "platform": "instagram",
+      "estimated_virality": "medium",
+      "diversity_attributes": {
+        "body_type": "strong",
+        "ethnicity": "Caucasian",
+        "age_range": "60-70",
+        "gender": "male"
+      },
+      "location": "home",
+      "time_of_day": "afternoon",
+      "energy_level": "medium",
+      "utm_link": "https://trainerapp.ai?utm_source=instagram&utm_medium=social&utm_campaign=workout_auto"
+    },
+    {
+      "prompt": "Magazine editorial: A young Black woman in her 20s energetically leading a cardio dance class in a bright, mirrored studio with colorful lights. The TrainerApp.AI interface shows her heart rate and calories burned during the session. Motivational text overlay reads 'Dance Your Way to Fitness!', sharp focus",
+      "variant_id": "wor_003",
+      "theme": "workout",
+      "tags": [
+        "cardio",
+        "dance",
+        "studio"
+      ],
+      "platform": "tiktok",
+      "estimated_virality": "high",
+      "diversity_attributes": {
+        "body_type": "athletic",
+        "ethnicity": "Black",
+        "age_range": "20-30",
+        "gender": "female"
+      },
+      "location": "fitness studio",
+      "time_of_day": "morning",
+      "energy_level": "high",
+      "utm_link": "https://trainerapp.ai?utm_source=tiktok&utm_medium=social&utm_campaign=workout_auto"
+    },
+    {
+      "prompt": "Magazine editorial: A middle-aged Asian woman in her 40s practicing yoga on a calm beach at sunrise, focusing on her breathing and stability. The TrainerApp.AI interface is visible on her smartwatch tracking her mindfulness. Text overlay reads 'Find Your Zen Every Morning!'., professional photography",
+      "variant_id": "wor_004",
+      "theme": "workout",
+      "tags": [
+        "yoga",
+        "outdoor",
+        "mindfulness"
+      ],
+      "platform": "both",
+      "estimated_virality": "medium",
+      "diversity_attributes": {
+        "body_type": "average",
+        "ethnicity": "Asian",
+        "age_range": "40-50",
+        "gender": "female"
+      },
+      "location": "beach",
+      "time_of_day": "sunrise",
+      "energy_level": "low",
+      "utm_link": "https://trainerapp.ai?utm_source=instagram&utm_medium=social&utm_campaign=workout_auto"
+    },
+    {
+      "prompt": "Ultra-realistic studio: A group of diverse individuals (varied body types, ethnic backgrounds) engaged in a boot camp workout at a city rooftop during sunset. The TrainerApp.AI interface displays workout achievements. The overlay text says 'Stronger Together, No Matter Where You Are!'., cinematic lighting",
+      "variant_id": "wor_005",
+      "theme": "workout",
+      "tags": [
+        "boot camp",
+        "outdoor",
+        "community"
+      ],
+      "platform": "tiktok",
+      "estimated_virality": "high",
+      "diversity_attributes": {
+        "body_type": "mixed",
+        "ethnicity": "mixed",
+        "age_range": "25-40",
+        "gender": "mixed"
+      },
+      "location": "city rooftop",
+      "time_of_day": "sunset",
+      "energy_level": "high",
+      "utm_link": "https://trainerapp.ai?utm_source=tiktok&utm_medium=social&utm_campaign=workout_auto"
+    }
+  ]
+}

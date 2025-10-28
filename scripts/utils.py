@@ -85,7 +85,7 @@ def setup_logging(name: str = "trainerapp") -> logging.Logger:
 
     # Configure root logger
     logging.basicConfig(
-        level=os.getenv('LOG_LEVEL', 'INFO'),
+        level=os.getenv('LOG_LEVEL', 'INFO').upper(),
         format="%(message)s",
         datefmt="[%Y-%m-%d %H:%M:%S]",
         handlers=[

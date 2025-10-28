@@ -34,7 +34,7 @@ edge-tts>=6.1.10  # FREE alternative
 
 # Social Media APIs
 facebook-sdk>=3.1.0
-tiktok-api>=6.2.0
+# tiktok-api>=6.2.0  # No official package - using direct API calls instead
 
 # Storage
 google-cloud-storage>=2.14.0
