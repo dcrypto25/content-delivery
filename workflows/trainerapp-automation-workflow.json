@@ -1,0 +1,490 @@
+{
+  "name": "TrainerApp.AI - Content Automation v2.0",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "trainerapp-input",
+        "options": {
+          "multipartFormDataOptions": {
+            "fileUploadField": "file"
+          }
+        },
+        "responseMode": "responseNode"
+      },
+      "id": "webhook-input",
+      "name": "Webhook Input",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "trainerapp-input"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"message\": \"Pipeline started\", \"job_id\": $('Webhook Input').item.json.job_id } }}",
+        "options": {}
+      },
+      "id": "webhook-response",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "command": "cd /app && python scripts/orchestrator.py --input {{ $json.input_url }} --theme {{ $json.theme }} --quantity {{ $json.quantity }} --provider {{ $json.provider }}"
+      },
+      "id": "run-orchestrator",
+      "name": "Run Content Pipeline",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {
+          "fileName": "={{ $json.filename }}",
+          "mimeType": "={{ $json.mimeType }}"
+        }
+      },
+      "id": "parse-results",
+      "name": "Parse Results",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "path": "/TrainerApp.AI/Generated/{{ $now.format('yyyy-MM') }}",
+        "options": {}
+      },
+      "id": "upload-to-drive",
+      "name": "Upload to Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1050, 300],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "1",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7,12,18,21 * * *"
+            }
+          ]
+        }
+      },
+      "id": "daily-scheduler",
+      "name": "Daily Content Scheduler",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 600]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Get next queued content from database/storage\nconst fs = require('fs');\nconst queuePath = '/app/storage/metadata/post_queue.json';\n\nlet queue = [];\ntry {\n  const data = fs.readFileSync(queuePath, 'utf8');\n  queue = JSON.parse(data);\n} catch (err) {\n  return [];\n}\n\n// Get next item\nif (queue.length === 0) {\n  return [];\n}\n\nconst nextPost = queue.shift();\n\n// Save updated queue\nfs.writeFileSync(queuePath, JSON.stringify(queue, null, 2));\n\nreturn [{ json: nextPost }];"
+      },
+      "id": "get-next-queued",
+      "name": "Get Next Queued Post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 600]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.platform }}",
+              "operation": "equals",
+              "value2": "instagram"
+            }
+          ]
+        }
+      },
+      "id": "route-by-platform",
+      "name": "Route by Platform",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 600]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v21.0/{{ $env.INSTAGRAM_BUSINESS_ACCOUNT_ID }}/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "caption",
+              "value": "={{ $json.caption }}"
+            },
+            {
+              "name": "video_url",
+              "value": "={{ $json.media_url }}"
+            },
+            {
+              "name": "media_type",
+              "value": "REELS"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "post-instagram",
+      "name": "Post to Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [850, 500],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "2",
+          "name": "Instagram OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.tiktokapis.com/v2/post/publish/video/init/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "post_info",
+              "value": "={{ { title: $json.title, privacy_level: 'PUBLIC_TO_EVERYONE' } }}"
+            },
+            {
+              "name": "source_info",
+              "value": "={{ { source: 'FILE_UPLOAD', video_size: $json.file_size } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "post-tiktok",
+      "name": "Post to TikTok",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [850, 700],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3",
+          "name": "TikTok Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO posts (post_id, platform, media_url, caption, posted_at, status) VALUES ('{{ $json.id }}', '{{ $json.platform }}', '{{ $json.media_url }}', '{{ $json.caption }}', NOW(), 'published')"
+      },
+      "id": "log-to-database",
+      "name": "Log to Database",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1050, 600],
+      "credentials": {
+        "postgres": {
+          "id": "4",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.SLACK_WEBHOOK_URL }}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "🎉 New post published!\\nPlatform: {{ $json.platform }}\\nPermalink: {{ $json.permalink }}"
+            }
+          ]
+        }
+      },
+      "id": "notify-slack",
+      "name": "Notify Slack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1250, 600]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 */6 * * *"
+            }
+          ]
+        }
+      },
+      "id": "analytics-scheduler",
+      "name": "Analytics Collector (6hrs)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 900]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Collect analytics from Instagram and TikTok\n// This would call analytics modules\n\nconst { exec } = require('child_process');\n\nexec('cd /app && python scripts/analytics/collect_metrics.py', (error, stdout, stderr) => {\n  if (error) {\n    throw new Error(`Analytics collection failed: ${error.message}`);\n  }\n  return [{ json: JSON.parse(stdout) }];\n});"
+      },
+      "id": "collect-analytics",
+      "name": "Collect Analytics",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 900]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": "={{ $env.ANALYTICS_SPREADSHEET_ID }}",
+        "sheetName": "Daily Metrics",
+        "columns": {
+          "mappings": [
+            {
+              "column": "Date",
+              "value": "={{ $now.format('yyyy-MM-dd') }}"
+            },
+            {
+              "column": "Total Posts",
+              "value": "={{ $json.total_posts }}"
+            },
+            {
+              "column": "Total Impressions",
+              "value": "={{ $json.total_impressions }}"
+            },
+            {
+              "column": "Total Engagement",
+              "value": "={{ $json.total_engagement }}"
+            },
+            {
+              "column": "Engagement Rate",
+              "value": "={{ $json.engagement_rate }}"
+            }
+          ]
+        }
+      },
+      "id": "save-to-sheets",
+      "name": "Save to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [650, 900],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.engagement_rate }}",
+              "operation": "largerEqual",
+              "value2": 0.05
+            }
+          ]
+        }
+      },
+      "id": "check-performance",
+      "name": "Check Performance Threshold",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 900]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Trigger optimization: increase weight of high-performing themes\nconst theme = $json.best_performing_theme;\nconst configPath = '/app/config/config.yaml';\n\n// Load and update config (simplified)\nconst fs = require('fs');\nconst yaml = require('js-yaml');\n\nconst config = yaml.load(fs.readFileSync(configPath, 'utf8'));\n\n// Increase weight of winning theme\nif (config.themes[theme]) {\n  config.themes[theme].weight = Math.min(config.themes[theme].weight * 1.2, 50);\n}\n\nfs.writeFileSync(configPath, yaml.dump(config));\n\nreturn [{ json: { message: 'Config updated', theme, new_weight: config.themes[theme].weight } }];"
+      },
+      "id": "optimize-config",
+      "name": "Optimize Configuration",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 900]
+    }
+  ],
+  "connections": {
+    "Webhook Input": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Run Content Pipeline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Content Pipeline": {
+      "main": [
+        [
+          {
+            "node": "Parse Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Results": {
+      "main": [
+        [
+          {
+            "node": "Upload to Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily Content Scheduler": {
+      "main": [
+        [
+          {
+            "node": "Get Next Queued Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Next Queued Post": {
+      "main": [
+        [
+          {
+            "node": "Route by Platform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Platform": {
+      "main": [
+        [
+          {
+            "node": "Post to Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Post to TikTok",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Instagram": {
+      "main": [
+        [
+          {
+            "node": "Log to Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to TikTok": {
+      "main": [
+        [
+          {
+            "node": "Log to Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Database": {
+      "main": [
+        [
+          {
+            "node": "Notify Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analytics Collector (6hrs)": {
+      "main": [
+        [
+          {
+            "node": "Collect Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Collect Analytics": {
+      "main": [
+        [
+          {
+            "node": "Save to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Check Performance Threshold",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Performance Threshold": {
+      "main": [
+        [
+          {
+            "node": "Optimize Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-28T00:00:00.000Z",
+  "versionId": "1"
+}

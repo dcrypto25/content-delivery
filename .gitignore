@@ -1,0 +1,88 @@
+# Environment & Secrets
+.env
+*.env
+!.env.example
+*.key
+*.pem
+*.p12
+config/*credentials*.json
+config/*.sqlite
+
+# Storage (Large files)
+storage/raw_inputs/*
+storage/generated/**/*
+storage/processed/*
+!storage/**/.gitkeep
+
+# Logs
+logs/*.log
+logs/**/*.log
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node (for n8n)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.npm
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+.cache/
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Testing
+.pytest_cache/
+test_output/
+
+# n8n specific
+.n8n/
+*.db
+
+# Large assets
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.jpg
+*.jpeg
+*.png
+*.gif
+!config/assets/*.png
+!docs/assets/*.png

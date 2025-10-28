@@ -1,0 +1,397 @@
+# ==========================================
+# TRAINERAPP.AI CONTENT AUTOMATION
+# Main Configuration File
+# ==========================================
+
+version: "2.0"
+last_updated: "2025-10-28"
+
+# ============ GENERATION PROFILES ============
+profiles:
+
+  # BUDGET MODE - Lowest cost (~$15/month for 500 assets)
+  budget:
+    image_provider: "replicate"  # $0.0055/image
+    video_provider: "replicate"  # $0.05/video
+    tts_provider: "edge-tts"     # FREE!
+    image_quantity: 80
+    video_quantity: 20
+    monthly_cost: "$15"
+
+  # BALANCED MODE - Best quality/cost ratio (~$40/month)
+  balanced:
+    image_provider: "gemini"     # $0.005/image
+    video_provider: "runway"     # $0.28/video
+    tts_provider: "elevenlabs"   # $5/month
+    image_quantity: 70
+    video_quantity: 30
+    monthly_cost: "$40"
+
+  # PREMIUM MODE - Highest quality (~$150/month)
+  premium:
+    image_provider: "midjourney"  # Via API
+    video_provider: "runway-gen3"
+    tts_provider: "elevenlabs-pro"
+    image_quantity: 50
+    video_quantity: 50
+    monthly_cost: "$150"
+
+# Active profile
+active_profile: "balanced"
+
+# ============ CONTENT THEMES ============
+themes:
+
+  nutrition:
+    weight: 30
+    keywords: ["meal prep", "protein", "clean eating", "macro tracking"]
+    colors: ["#4CAF50", "#8BC34A", "#CDDC39"]
+    music_genre: "chill"
+    target_audience: "health_conscious"
+
+  workout:
+    weight: 40
+    keywords: ["HIIT", "strength training", "cardio", "home workout"]
+    colors: ["#FF5722", "#F44336", "#E91E63"]
+    music_genre: "energetic"
+    target_audience: "fitness_enthusiasts"
+
+  motivation:
+    weight: 20
+    keywords: ["mindset", "consistency", "transformation", "goals"]
+    colors: ["#2196F3", "#3F51B5", "#9C27B0"]
+    music_genre: "inspirational"
+    target_audience: "beginners"
+
+  app_features:
+    weight: 10
+    keywords: ["AI coach", "workout tracker", "progress", "technology"]
+    colors: ["#00BCD4", "#009688", "#607D8B"]
+    music_genre: "tech"
+    target_audience: "tech_savvy"
+
+# ============ PLATFORM SPECIFICATIONS ============
+platforms:
+
+  instagram:
+    enabled: true
+    priority: 40  # % of content
+
+    formats:
+      feed:
+        dimensions: [1080, 1080]
+        aspect_ratio: "1:1"
+        max_duration: 60
+        file_size_mb: 30
+
+      reels:
+        dimensions: [1080, 1920]
+        aspect_ratio: "9:16"
+        max_duration: 90
+        file_size_mb: 50
+        preferred: true
+
+      stories:
+        dimensions: [1080, 1920]
+        aspect_ratio: "9:16"
+        max_duration: 15
+        file_size_mb: 30
+
+    posting:
+      daily_limit: 5
+      optimal_times: ["07:00", "12:00", "18:00", "21:00"]
+      min_interval_hours: 4
+
+    captions:
+      max_length: 2200
+      min_length: 50
+      hashtag_count: [15, 25]
+      emoji_density: "medium"
+      cta_required: true
+
+  tiktok:
+    enabled: true
+    priority: 60  # % of content
+
+    formats:
+      video:
+        dimensions: [1080, 1920]
+        aspect_ratio: "9:16"
+        min_duration: 15
+        max_duration: 60
+        file_size_mb: 287
+
+    posting:
+      daily_limit: 10
+      optimal_times: ["08:00", "12:00", "17:00", "20:00", "22:00"]
+      min_interval_hours: 2
+
+    captions:
+      max_length: 2200
+      min_length: 30
+      hashtag_count: [3, 8]
+      emoji_density: "high"
+      hook_required: true
+
+# ============ PROMPT ENGINEERING ============
+prompts:
+
+  image_generation:
+    base_template: |
+      {style} fitness photography: {subject} {action} in {location}.
+      {details}. {app_integration}. {lighting}. {text_overlay}.
+      High quality, professional, Instagram-worthy.
+
+    style_variations:
+      - "Ultra-realistic studio"
+      - "Cinematic 4K"
+      - "Documentary-style"
+      - "Magazine editorial"
+      - "Lifestyle commercial"
+      - "Social media aesthetic"
+
+    diversity_requirements:
+      body_types: ["athletic", "average", "muscular", "lean", "curvy"]
+      ethnicities: ["diverse", "multi-ethnic", "inclusive"]
+      ages: ["20s", "30s", "40s", "50+"]
+      genders: ["male", "female", "non-binary representation"]
+
+    locations:
+      - "modern gym with equipment"
+      - "minimalist home workout space"
+      - "outdoor park setting"
+      - "rooftop urban environment"
+      - "beach sunrise/sunset"
+      - "studio with natural lighting"
+
+  video_generation:
+    base_template: |
+      {duration} second vertical video: {subject} performing {exercise}.
+      {camera_movement}. {app_ui_overlay}. {text_animation}.
+      {music_description}. {energy_level}. {end_frame}.
+
+    camera_movements:
+      - "slow zoom in on form"
+      - "dynamic angle change"
+      - "follow the movement"
+      - "wide to close-up transition"
+      - "steady tracking shot"
+
+    app_ui_elements:
+      - "real-time heart rate monitor (top right)"
+      - "rep counter (center)"
+      - "calorie burn tracker (bottom)"
+      - "progress bar (top)"
+      - "AI coach tips popup (middle)"
+
+  caption_generation:
+    structures:
+      hook_format:
+        - "POV: {relatable_situation}"
+        - "Nobody talks about {controversial_truth}"
+        - "3 things I wish I knew about {topic}"
+        - "Stop {bad_habit}. Start {good_habit}."
+        - "{Shocking_stat} people don't know this"
+
+      body_format:
+        - "Story + 3 bullet points + CTA"
+        - "Question + Answer + Social proof + CTA"
+        - "Problem + Solution + App feature + CTA"
+
+      cta_templates:
+        - "Get your personalized plan → trainerapp.ai (link in bio)"
+        - "Try 7 days free → Comment 'AI' for the link"
+        - "Your AI coach is waiting → trainerapp.ai"
+        - "Download the app that changed everything → Link in bio"
+
+# ============ HASHTAG STRATEGY ============
+hashtags:
+
+  evergreen:
+    fitness:
+      - "#FitnessMotivation"
+      - "#WorkoutRoutine"
+      - "#FitLife"
+      - "#HealthyLifestyle"
+      - "#GymLife"
+      - "#FitnessGoals"
+
+    ai_tech:
+      - "#FitnessAI"
+      - "#AICoach"
+      - "#FitnessTech"
+      - "#SmartFitness"
+      - "#TechForGood"
+
+    brand:
+      - "#TrainerAppAI"
+      - "#AITrainer"
+      - "#PersonalizedFitness"
+
+  trending_sources:
+    - "https://www.tiktok.com/discover"
+    - "https://www.instagram.com/explore/tags/"
+
+  rotation_strategy:
+    change_every_n_posts: 3
+    a_b_test_hashtags: true
+    track_performance: true
+
+# ============ ANALYTICS & OPTIMIZATION ============
+analytics:
+
+  metrics_to_track:
+    - "likes"
+    - "comments"
+    - "shares"
+    - "saves"
+    - "views"
+    - "watch_time_percentage"
+    - "click_through_rate"
+    - "follower_growth"
+
+  performance_thresholds:
+    excellent:
+      engagement_rate: 0.08
+      save_rate: 0.03
+      share_rate: 0.02
+
+    good:
+      engagement_rate: 0.05
+      save_rate: 0.02
+      share_rate: 0.01
+
+    poor:
+      engagement_rate: 0.02
+      save_rate: 0.005
+      share_rate: 0.003
+
+  feedback_loop:
+    enabled: true
+    analysis_frequency: "daily"
+    auto_adjust_prompts: true
+    winning_content_weight: 2.0
+    losing_content_weight: 0.5
+
+  reporting:
+    daily_summary: true
+    weekly_deep_dive: true
+    monthly_executive_report: true
+    export_format: ["json", "csv", "pdf"]
+
+# ============ ASSET ENHANCEMENT ============
+enhancements:
+
+  watermark:
+    enabled: true
+    type: "logo"  # logo, text, or both
+    image_path: "./config/assets/trainerapp-logo.png"
+    position: "bottom-right"
+    opacity: 0.15
+    size_percentage: 8
+
+  captions_overlay:
+    enabled: true
+    font: "Montserrat-Bold"
+    color: "#FFFFFF"
+    stroke_color: "#000000"
+    stroke_width: 2
+    position: "center"
+    animation: "fade-in"
+
+  music:
+    enabled: true
+    library_path: "./config/assets/music/"
+    genres:
+      energetic: ["gym-beat-1.mp3", "workout-energy.mp3"]
+      chill: ["calm-vibes.mp3", "morning-flow.mp3"]
+      inspirational: ["rise-up.mp3", "believe.mp3"]
+    volume: 0.3
+    fade_in: 1.0
+    fade_out: 1.0
+
+  filters:
+    instagram_style: "Clarendon"
+    brightness: 1.1
+    contrast: 1.15
+    saturation: 1.1
+    sharpness: 1.05
+
+# ============ ERROR HANDLING ============
+error_handling:
+
+  retry_logic:
+    max_attempts: 3
+    backoff_multiplier: 2
+    initial_delay_seconds: 5
+
+  fallbacks:
+    - name: "API timeout"
+      action: "retry_with_smaller_batch"
+
+    - name: "Rate limit hit"
+      action: "queue_and_delay"
+
+    - name: "Generation failed"
+      action: "skip_and_log"
+
+    - name: "Upload failed"
+      action: "save_locally_retry_later"
+
+  notifications:
+    critical_errors: true
+    daily_error_summary: true
+    channels: ["log", "email"]
+
+# ============ SCALING CONFIGURATION ============
+scaling:
+
+  current_stage: "startup"  # startup, growth, scale
+
+  stages:
+    startup:
+      posts_per_day: 4
+      monthly_budget: 50
+      manual_review: true
+
+    growth:
+      posts_per_day: 8
+      monthly_budget: 150
+      manual_review: false
+      auto_optimize: true
+
+    scale:
+      posts_per_day: 20
+      monthly_budget: 500
+      multi_account: true
+      advanced_analytics: true
+
+  auto_scaling:
+    enabled: false
+    trigger_metric: "roi"
+    scale_up_threshold: 3.0
+    scale_down_threshold: 1.5
+
+# ============ COMPLIANCE & SAFETY ============
+compliance:
+
+  content_filters:
+    - "no_explicit_content"
+    - "no_medical_claims"
+    - "no_guaranteed_results"
+    - "include_disclaimers"
+
+  disclaimers:
+    required: true
+    text: "Results may vary. Consult healthcare provider before starting any fitness program."
+    placement: "caption_end"
+
+  copyright:
+    music_licensed: true
+    original_content_only: true
+    attribution_required: false
+
+  platform_policies:
+    respect_rate_limits: true
+    follow_community_guidelines: true
+    authentic_engagement_only: true
