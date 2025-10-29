@@ -191,7 +191,14 @@ class VideoGenerator:
 
             # Download video
             if output:
-                video_url = output if isinstance(output, str) else output[0] if isinstance(output, list) else output.get('url')
+                # Handle different output types from Replicate
+                if isinstance(output, str):
+                    video_url = output
+                elif isinstance(output, list):
+                    video_url = str(output[0])  # FileOutput can be converted to string
+                else:
+                    # FileOutput object - convert to string to get URL
+                    video_url = str(output)
 
                 console.print(f"[cyan]⬇️  Downloading video...[/cyan]")
                 response = requests.get(video_url, timeout=120)

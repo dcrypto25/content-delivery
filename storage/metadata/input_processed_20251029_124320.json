@@ -1,0 +1,93 @@
+{
+  "input_file": "storage/generated/images/test_20251028_163758_test_001.jpg",
+  "user_description": "Person doing this exercise and checking TrainerApp.AI on phone between sets",
+  "style": "similar",
+  "vision_analysis": {
+    "scene": "The image is set in a modern gym with windows allowing natural light. The interior has large open spaces with a few visible gym equipment in the background. The flooring appears to be padded or rubber for safety during workouts.",
+    "subject": {
+      "body_type": "Athletic and muscular",
+      "ethnicity": "Not identifiable",
+      "gender": "Female",
+      "age": "Adult",
+      "clothing": "Wearing a black sports bra and black leggings"
+    },
+    "action": "The person is performing a squat while holding a barbell across her shoulders.",
+    "emotion": "Focused and determined, indicative of high energy and concentration.",
+    "ui_elements": "None visible",
+    "text_overlay": "No text visible",
+    "lighting": "Natural daylight with even illumination, creating a clear and vibrant visual appearance.",
+    "colors": "Dominant colors are black from the clothing and neutral tones from the gym environment.",
+    "style": "The photography style is sharp and realistic with an emphasis on clarity and the subject's expression.",
+    "fitness_category": "Workout"
+  },
+  "content_brief": {
+    "core_message": "Empower your fitness journey by leveraging technology and personal determination for maximum performance.",
+    "visual_style": "Maintain a sharp and realistic photography style with an emphasis on clarity and focus, replicating the natural light and vibrancy of the gym environment.",
+    "key_elements": [
+      "Athletic female subject performing a squat with a barbell",
+      "A phone displaying the TrainerApp.AI interface between sets"
+    ],
+    "elements_to_avoid": [
+      "Clutter in the gym background",
+      "Dull or artificial lighting"
+    ],
+    "target_audience": "Fitness enthusiasts and individuals looking to integrate technology into their workout routines, primarily aged 18-35, both genders, health-conscious and tech-savvy.",
+    "emotional_tone": "Focused, determined, and motivated, showcasing the blend of physical effort and smart training.",
+    "content_angles": [
+      "Highlighting the effectiveness of combining traditional workouts with modern fitness technology",
+      "Encouraging the audience to track their progress and enhance workouts through the TrainerApp.AI"
+    ],
+    "technical_specs": {
+      "lighting": "Utilize natural daylight with even illumination to enhance the vibrant feel of the gym",
+      "composition": "Focus on the subject in action with a slight depth of field to keep the background gym equipment slightly blurred, emphasizing the workout",
+      "color_palette": "Dominant blacks and neutral tones to maintain a sleek and modern appearance"
+    },
+    "theme": "workout/nutrition/motivation/app_features"
+  },
+  "prompts": [
+    {
+      "prompt": "Capture an athletic female of Asian descent, energetically performing a squat with a barbell in a bright, open gym filled with natural light. The focus is on her determined expression as she engages in her workout. In the foreground, clearly display a phone featuring the TrainerApp.AI interface, showcasing her progress stats between sets. The background should include slightly blurred gym equipment for depth, with a color palette of dominant blacks and neutral tones enhancing the sleek atmosphere.",
+      "variant_id": "wor_001",
+      "content_angle": "Highlighting the effectiveness of combining traditional workouts with modern fitness technology",
+      "diversity_attributes": {
+        "body_type": "athletic",
+        "ethnicity": "Asian",
+        "age_range": "20-30",
+        "gender": "female"
+      },
+      "platform": "instagram",
+      "estimated_virality": "high",
+      "tags": [
+        "FitnessJourney",
+        "TechInFitness",
+        "SquatGoals"
+      ],
+      "text_overlay": "Unleash your potential - Track, Train, Triumph!",
+      "theme": "workout/nutrition/motivation/app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "Feature a male athlete of African descent, engaged in a powerful squat with a barbell, set in a sleek, modern gym under natural daylight pouring in through large windows. His focus and intensity are palpable, emphasizing his motivation. Place the TrainerApp.AI app interface on a nearby bench, showing live tracking of his workout progress. Ensure the background is subtly blurred, keeping the color palette dominated by blacks and neutral tones, providing an energizing vibe.",
+      "variant_id": "wor_002",
+      "content_angle": "Encouraging the audience to track their progress and enhance workouts through the TrainerApp.AI",
+      "diversity_attributes": {
+        "body_type": "muscular",
+        "ethnicity": "African",
+        "age_range": "25-35",
+        "gender": "male"
+      },
+      "platform": "tiktok",
+      "estimated_virality": "medium",
+      "tags": [
+        "WorkoutMotivation",
+        "BarbellSquat",
+        "TechForFitness"
+      ],
+      "text_overlay": "Push your limits - Smart training for stronger gains!",
+      "theme": "workout/nutrition/motivation/app_features",
+      "content_type": "image"
+    }
+  ],
+  "quantity": 2,
+  "timestamp": "2025-10-29T12:43:20.120225"
+}
