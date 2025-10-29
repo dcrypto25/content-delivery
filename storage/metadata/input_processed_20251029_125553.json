@@ -1,0 +1,93 @@
+{
+  "input_file": "storage/generated/images/test_20251028_163758_test_001.jpg",
+  "user_description": "Person doing this exercise and checking TrainerApp.AI on phone between sets",
+  "style": "similar",
+  "vision_analysis": {
+    "scene": "The scene is set in a spacious, modern gym. The environment features large windows allowing natural light to flood in. The floor is made of rubber, typical for workout spaces, and gym equipment is visible in the background.",
+    "subject": {
+      "body_type": "Athletic and toned",
+      "ethnicity": "Undetermined",
+      "gender": "Female",
+      "age": "20s to 30s",
+      "clothing": "Wearing a black sports bra and black leggings"
+    },
+    "action": "The subject is holding a barbell, preparing to squat. Her posture suggests focus and readiness for exercise.",
+    "emotion": "Determined and energetic",
+    "ui_elements": "None visible",
+    "text_overlay": "None visible",
+    "lighting": "The lighting is natural, coming from the large windows, providing a soft and even illumination across the scene.",
+    "colors": "Dominant colors include black from the clothing, with neutral tones from the environment and some natural light highlights.",
+    "style": "The photo has a modern, fitness-focused style with high clarity and vibrancy, emphasizing the subject's features and energy.",
+    "fitness_category": "Workout"
+  },
+  "content_brief": {
+    "core_message": "Empower your fitness journey with technology at your fingertips, showcasing the balance between dedication to workouts and utilizing smart tools like TrainerApp.AI for optimal performance.",
+    "visual_style": "Modern, vibrant, and energetic, similar to the original scene with an emphasis on clarity and focus on the subject's determination.",
+    "key_elements": [
+      "A female subject in athletic clothing engaging in a squat with a barbell",
+      "A smartphone displaying the TrainerApp.AI interface, positioned to show the app's features"
+    ],
+    "elements_to_avoid": [
+      "Distracting backgrounds that draw focus away from the subject",
+      "Cluttered or outdated gym equipment that does not align with the modern aesthetic"
+    ],
+    "target_audience": "Fitness enthusiasts aged 20s to 30s who value technology in their training and seek motivation and community support through fitness apps.",
+    "emotional_tone": "Determined, energetic, and motivational, inspiring viewers to integrate tech into their fitness routine.",
+    "content_angles": [
+      "The importance of tracking workouts and progress with TrainerApp.AI",
+      "The balance of physical strength training and leveraging technology for optimal results"
+    ],
+    "technical_specs": {
+      "lighting": "Natural lighting from large windows, maintaining soft and even illumination",
+      "composition": "Focus on the subject in the foreground with the gym environment in the background, ensuring the phone is clearly visible in the frame",
+      "colors": "Maintain the dominant black and neutral palette, with highlights from natural light for a fresh and modern look"
+    },
+    "theme": "workout/nutrition/motivation/app_features"
+  },
+  "prompts": [
+    {
+      "prompt": "A determined Hispanic woman in her late 20s, wearing a stylish black sports bra and high-waisted leggings, is engaging in a barbell squat at a modern gym with large windows allowing natural light to flood the space. The TrainerApp.AI interface is clearly shown on her smartphone, placed on the floor next to her, displaying her workout stats and progress. The background is softly blurred, highlighting her focused expression as she dedicates herself to the lift. The lighting is soft and even, enhancing the vibrant yet clean aesthetic of the gym. The motivational text overlay reads: 'Strength Meets Smart Training.'",
+      "variant_id": "wor_001",
+      "content_angle": "The importance of tracking workouts and progress with TrainerApp.AI",
+      "diversity_attributes": {
+        "body_type": "athletic",
+        "ethnicity": "Hispanic",
+        "age_range": "25-30",
+        "gender": "female"
+      },
+      "platform": "both",
+      "estimated_virality": "high",
+      "tags": [
+        "fitness",
+        "technology",
+        "workoutmotivation"
+      ],
+      "text_overlay": "Strength Meets Smart Training",
+      "theme": "workout/nutrition/motivation/app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "An athletic Black male in his early 30s, wearing a fitted black tank top and neon green shorts, is performing a barbell squat in a sleek urban gym with bright lighting coming from skylights. He looks intensely focused as he stabilizes the barbell, with his smartphone displaying the TrainerApp.AI interface propped on a nearby weight rack, showcasing a live feedback feature. The background remains clean and modern, enhancing the motivational atmosphere. The text overlay states: 'Elevate Your Performance with Technology.'",
+      "variant_id": "wor_002",
+      "content_angle": "The balance of physical strength training and leveraging technology for optimal results",
+      "diversity_attributes": {
+        "body_type": "muscular",
+        "ethnicity": "Black",
+        "age_range": "30-35",
+        "gender": "male"
+      },
+      "platform": "instagram",
+      "estimated_virality": "medium",
+      "tags": [
+        "fitness",
+        "strengthtraining",
+        "tech"
+      ],
+      "text_overlay": "Elevate Your Performance with Technology",
+      "theme": "workout/nutrition/motivation/app_features",
+      "content_type": "image"
+    }
+  ],
+  "quantity": 2,
+  "timestamp": "2025-10-29T12:55:53.211389"
+}

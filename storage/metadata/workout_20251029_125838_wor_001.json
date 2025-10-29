@@ -1,0 +1,25 @@
+{
+  "prompt": "A determined Hispanic woman in her late 20s, wearing a stylish black sports bra and high-waisted leggings, is engaging in a barbell squat at a modern gym with large windows allowing natural light to flood the space. The TrainerApp.AI interface is clearly shown on her smartphone, placed on the floor next to her, displaying her workout stats and progress. The background is softly blurred, highlighting her focused expression as she dedicates herself to the lift. The lighting is soft and even, enhancing the vibrant yet clean aesthetic of the gym. The motivational text overlay reads: 'Strength Meets Smart Training.'",
+  "variant_id": "wor_001",
+  "content_angle": "The importance of tracking workouts and progress with TrainerApp.AI",
+  "diversity_attributes": {
+    "body_type": "athletic",
+    "ethnicity": "Hispanic",
+    "age_range": "25-30",
+    "gender": "female"
+  },
+  "platform": "both",
+  "estimated_virality": "high",
+  "tags": [
+    "fitness",
+    "technology",
+    "workoutmotivation"
+  ],
+  "text_overlay": "Strength Meets Smart Training",
+  "theme": "workout/nutrition/motivation/app_features",
+  "content_type": "image",
+  "duration": 5,
+  "provider": "replicate_minimax",
+  "size": "1080x1920",
+  "saved_at": "2025-10-29T12:58:38.617337"
+}

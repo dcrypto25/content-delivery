@@ -114,10 +114,19 @@ class ImageGenerator:
         self,
         prompt: str,
         metadata: Dict[str, Any],
-        size: str = "1080x1920"
+        size: str = "1080x1920",
+        base_image: Optional[Path] = None,
+        strength: float = 0.75
     ) -> Optional[Path]:
         """
         Generate a single image
+
+        Args:
+            prompt: Text prompt for image generation
+            metadata: Additional metadata
+            size: Image resolution (default: 1080x1920 for vertical)
+            base_image: Optional base image for img2img (maintains realism)
+            strength: How much to transform base image (0.0-1.0, default 0.75)
 
         Returns: Path to saved image file
         """
@@ -127,10 +136,10 @@ class ImageGenerator:
 
         try:
             if self.provider == 'gemini':
-                image_data = self._generate_gemini(prompt, size)
+                image_data = self._generate_gemini(prompt, size, base_image, strength)
             elif self.provider in ['replicate', 'replicate_dev', 'replicate_pro']:
                 try:
-                    image_data = self._generate_replicate(prompt, size)
+                    image_data = self._generate_replicate(prompt, size, base_image, strength)
                 except Exception as e:
                     # If Pro/Dev fails, fallback to Schnell
                     if self.provider in ['replicate_pro', 'replicate_dev']:
@@ -138,7 +147,7 @@ class ImageGenerator:
                         logger.warning(f"Fallback from {self.provider}: {str(e)}")
                         original_provider = self.provider
                         self.provider = 'replicate'
-                        image_data = self._generate_replicate(prompt, size)
+                        image_data = self._generate_replicate(prompt, size, base_image, strength)
                         self.provider = original_provider  # Restore
                     else:
                         raise
@@ -171,7 +180,64 @@ class ImageGenerator:
 
         return None
 
-    def _generate_gemini(self, prompt: str, size: str) -> bytes:
+    def _generate_img2img_replicate(self, prompt: str, size: str, base_image: Path, strength: float = 0.75) -> bytes:
+        """Generate image using img2img (maintains realism from base photo)"""
+
+        width, height = map(int, size.split('x'))
+
+        # Use SDXL img2img which is excellent for photo variations
+        model = "stability-ai/sdxl:39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b"
+
+        console.print(f"[yellow]⏳ Generating variation from base image (img2img)...[/yellow]")
+        console.print(f"[dim]Strength: {strength} (higher = more changes)[/dim]")
+
+        start_time = time.time()
+
+        try:
+            # Read and encode base image
+            with open(base_image, 'rb') as f:
+                import base64
+                image_data = base64.b64encode(f.read()).decode('utf-8')
+                image_uri = f"data:image/jpeg;base64,{image_data}"
+
+            # Enhance prompt for photorealism
+            enhanced_prompt = self._enhance_prompt_for_realism(prompt)
+
+            # img2img parameters
+            input_params = {
+                "image": image_uri,
+                "prompt": enhanced_prompt,
+                "width": width,
+                "height": height,
+                "strength": strength,  # How much to transform (0.0 = same, 1.0 = completely new)
+                "num_inference_steps": 40,
+                "guidance_scale": 7.5,
+                "num_outputs": 1,
+                "scheduler": "KarrasDPM",
+                "refine": "expert_ensemble_refiner"
+            }
+
+            output = replicate.run(model, input=input_params)
+
+            elapsed = time.time() - start_time
+            console.print(f"[green]✓[/green] Generated variation in {elapsed:.1f}s")
+
+            # Download result
+            if output and len(output) > 0:
+                image_url = str(output[0])
+                console.print(f"[cyan]⬇️  Downloading result...[/cyan]")
+                response = requests.get(image_url, timeout=30)
+                response.raise_for_status()
+
+                return response.content
+
+        except Exception as e:
+            logger.error(f"img2img generation failed: {str(e)}")
+            raise
+
+        raise Exception("No output from img2img")
+
+    def _generate_gemini(self, prompt: str, size: str, base_image: Optional[Path] = None, strength: float = 0.75) -> bytes:
         """Generate image using Gemini (Imagen via Generative AI SDK)"""
 
         # Note: As of early 2025, Gemini doesn't directly generate images via the generativeai SDK
@@ -183,11 +249,15 @@ class ImageGenerator:
         # Fallback to Replicate
         return self._generate_replicate(prompt, size)
 
-    def _generate_replicate(self, prompt: str, size: str) -> bytes:
+    def _generate_replicate(self, prompt: str, size: str, base_image: Optional[Path] = None, strength: float = 0.75) -> bytes:
         """Generate image using Replicate (FLUX models)"""
 
         # Parse size
         width, height = map(int, size.split('x'))
+
+        # If base_image provided, use img2img approach
+        if base_image:
+            return self._generate_img2img_replicate(prompt, size, base_image, strength)
 
         # Determine which FLUX model to use based on provider setting
         model_map = {

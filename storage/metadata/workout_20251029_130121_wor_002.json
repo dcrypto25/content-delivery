@@ -1,0 +1,25 @@
+{
+  "prompt": "An athletic Black male in his early 30s, wearing a fitted black tank top and neon green shorts, is performing a barbell squat in a sleek urban gym with bright lighting coming from skylights. He looks intensely focused as he stabilizes the barbell, with his smartphone displaying the TrainerApp.AI interface propped on a nearby weight rack, showcasing a live feedback feature. The background remains clean and modern, enhancing the motivational atmosphere. The text overlay states: 'Elevate Your Performance with Technology.'",
+  "variant_id": "wor_002",
+  "content_angle": "The balance of physical strength training and leveraging technology for optimal results",
+  "diversity_attributes": {
+    "body_type": "muscular",
+    "ethnicity": "Black",
+    "age_range": "30-35",
+    "gender": "male"
+  },
+  "platform": "instagram",
+  "estimated_virality": "medium",
+  "tags": [
+    "fitness",
+    "strengthtraining",
+    "tech"
+  ],
+  "text_overlay": "Elevate Your Performance with Technology",
+  "theme": "workout/nutrition/motivation/app_features",
+  "content_type": "image",
+  "duration": 5,
+  "provider": "replicate_minimax",
+  "size": "1080x1920",
+  "saved_at": "2025-10-29T13:01:21.390570"
+}
