@@ -129,6 +129,18 @@ class FileManager:
             theme = metadata.get('theme', 'general')
             variant_id = metadata.get('variant_id', '000')
 
+            # Sanitize theme to avoid path separators
+            # If theme contains multiple values (e.g., from choices list), take first one
+            if isinstance(theme, str):
+                theme = theme.replace('/', '_').replace('\\', '_')
+                if '_' in theme:
+                    # Take first theme if multiple concatenated
+                    theme = theme.split('_')[0]
+
+            # Sanitize variant_id as well
+            if isinstance(variant_id, str):
+                variant_id = variant_id.replace('/', '_').replace('\\', '_')
+
             extension = 'jpg' if asset_type == 'image' else 'mp4'
             filename = f"{theme}_{timestamp}_{variant_id}.{extension}"
 

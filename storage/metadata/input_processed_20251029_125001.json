@@ -1,0 +1,95 @@
+{
+  "input_file": "storage/generated/images/test_20251028_163758_test_001.jpg",
+  "user_description": "Person doing this exercise and checking TrainerApp.AI on phone between sets",
+  "style": "similar",
+  "vision_analysis": {
+    "scene": "The environment is an indoor gym with large windows allowing natural light in. There are gym equipment and weights visible in the background, along with a high ceiling and neutral-colored walls.",
+    "subject": {
+      "body_type": "Athletic and muscular build",
+      "ethnicity": "Not specified",
+      "gender": "Female",
+      "age": "20s to 30s",
+      "clothing": "Wearing a black sports bra and leggings"
+    },
+    "action": "The person is holding a weight bar, positioned as if preparing for or completing a squat.",
+    "emotion": "Focused and determined, with a high energy level",
+    "ui_elements": "None visible",
+    "text_overlay": "None visible",
+    "lighting": "Soft natural lighting, highlighting the subject\u2019s features and emphasizing muscle definition",
+    "colors": "Dominant colors are black, white, and grey with natural light tones",
+    "style": "Crisp, high-definition photography focusing on fitness and athleticism",
+    "fitness_category": "Workout"
+  },
+  "content_brief": {
+    "core_message": "Empower your workout journey with TrainerApp.AI, where focus meets technology for optimal performance.",
+    "visual_style": "Crisp, high-definition photography emphasizing fitness and athleticism, with soft natural lighting highlighting the subject's features.",
+    "key_elements": [
+      "Athletic female subject in an indoor gym setting",
+      "Subject using TrainerApp.AI on her phone between sets"
+    ],
+    "elements_to_avoid": [
+      "Cluttered backgrounds that detract from the subject",
+      "Dark or harsh lighting that obscures details"
+    ],
+    "target_audience": "Fitness enthusiasts aged 20-40, tech-savvy individuals seeking to enhance their workout routines through apps and technology.",
+    "emotional_tone": "Focused and determined, infused with a sense of motivation and empowerment.",
+    "content_angles": [
+      "The integration of technology in fitness routines for improved results",
+      "The importance of rest and recovery in a workout regimen"
+    ],
+    "technical_specs": {
+      "lighting": "Soft natural lighting to enhance muscle definition and create an inviting atmosphere",
+      "composition": "Subject centered in the frame with gym equipment in the background to convey an active environment",
+      "color_palette": "Dominant neutral tones with pops of black and grey, complemented by natural light"
+    },
+    "theme": "workout/nutrition/motivation/app_features"
+  },
+  "prompts": [
+    {
+      "prompt": "A fit Asian female athlete in her late 20s is taking a break between sets on a gym bench. She's looking at her phone, using TrainerApp.AI to track her workout progress. The gym is well-lit with soft natural lighting illuminating her features and highlighting her determination. The background includes neatly arranged gym equipment, keeping the focus on her. The warm, neutral-toned colors create an inviting atmosphere that emphasizes her athleticism.",
+      "variant_id": "wor_001",
+      "content_angle": "The integration of technology in fitness routines for improved results",
+      "diversity_attributes": {
+        "body_type": "athletic",
+        "ethnicity": "Asian",
+        "age_range": "25-30",
+        "gender": "female"
+      },
+      "platform": "instagram",
+      "estimated_virality": "medium",
+      "tags": [
+        "fitness",
+        "technology",
+        "motivation",
+        "TrainerAppAI"
+      ],
+      "text_overlay": "Empower your journey with every rep!",
+      "theme": "workout/nutrition/motivation/app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "A determined Black male athlete in his early 30s is in a bright indoor gym, focusing on his next set. He pauses to check his workout stats on TrainerApp.AI, displaying a concentrated expression. Soft natural light flows through the gym's large windows, highlighting his muscle definition and creating a motivating backdrop. The space is minimalistic, with gym equipment in soft focus behind him, ensuring he remains the focal point in a refreshing, high-definition shot.",
+      "variant_id": "wor_002",
+      "content_angle": "The importance of rest and recovery in a workout regimen",
+      "diversity_attributes": {
+        "body_type": "muscular",
+        "ethnicity": "Black",
+        "age_range": "30-35",
+        "gender": "male"
+      },
+      "platform": "tiktok",
+      "estimated_virality": "high",
+      "tags": [
+        "workout",
+        "fitnessapp",
+        "motivation",
+        "TrainerAppAI"
+      ],
+      "text_overlay": "Rest, recover, and rise stronger!",
+      "theme": "workout/nutrition/motivation/app_features",
+      "content_type": "image"
+    }
+  ],
+  "quantity": 2,
+  "timestamp": "2025-10-29T12:50:01.585521"
+}
