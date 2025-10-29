@@ -1,0 +1,23 @@
+{
+  "prompt": "A mixed-ethnicity group of friends (2 men and 1 woman, ages 30-40) at a vibrant beach workout session. They are seen encouraging each other while checking their live stats with the Gym Buddy feature on their phones. The scene is filled with the warm glow of the setting sun, capturing their camaraderie and energy.",
+  "variant_id": "app_003",
+  "content_angle": "Step-by-step demonstrations",
+  "diversity_attributes": {
+    "body_type": "varied",
+    "ethnicity": "Mixed",
+    "age_range": "30-40",
+    "gender": "male and female"
+  },
+  "platform": "tiktok",
+  "estimated_virality": "high",
+  "tags": [
+    "GymBuddy",
+    "WorkoutTogether"
+  ],
+  "text_overlay": "Together we achieve more \u2013 let's get fitter!",
+  "theme": "app_features",
+  "content_type": "image",
+  "provider": "replicate_dev",
+  "size": "1080x1920",
+  "saved_at": "2025-10-29T12:24:36.017212"
+}

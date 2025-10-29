@@ -129,7 +129,19 @@ class ImageGenerator:
             if self.provider == 'gemini':
                 image_data = self._generate_gemini(prompt, size)
             elif self.provider in ['replicate', 'replicate_dev', 'replicate_pro']:
-                image_data = self._generate_replicate(prompt, size)
+                try:
+                    image_data = self._generate_replicate(prompt, size)
+                except Exception as e:
+                    # If Pro/Dev fails, fallback to Schnell
+                    if self.provider in ['replicate_pro', 'replicate_dev']:
+                        console.print(f"[yellow]⚠️  {self.provider} failed, falling back to replicate (fast)[/yellow]")
+                        logger.warning(f"Fallback from {self.provider}: {str(e)}")
+                        original_provider = self.provider
+                        self.provider = 'replicate'
+                        image_data = self._generate_replicate(prompt, size)
+                        self.provider = original_provider  # Restore
+                    else:
+                        raise
             else:
                 raise ValueError(f"Unsupported provider: {self.provider}")
 
@@ -232,11 +244,29 @@ class ImageGenerator:
                 "output_quality": 95
             }
 
-        output = replicate.run(model, input=input_params)
+        # Use replicate.run with status updates
+        console.print(f"[yellow]⏳ Generating with {model.split('/')[-1]}...[/yellow]")
+
+        start_time = time.time()
+        timeout = 180  # 3 minutes max
+
+        try:
+            # replicate.run() handles polling internally - this is normal and free
+            # The GET requests you see are just status checks (no extra cost)
+            output = replicate.run(model, input=input_params)
+
+            elapsed = time.time() - start_time
+            console.print(f"[green]✓[/green] Generated in {elapsed:.1f}s")
+
+        except Exception as e:
+            if time.time() - start_time > timeout:
+                raise TimeoutError(f"Generation timeout after {timeout}s - model may be busy, try again")
+            raise
 
         # Download image
         if output and len(output) > 0:
             image_url = output[0]
+            console.print(f"[cyan]⬇️  Downloading result...[/cyan]")
             response = requests.get(image_url, timeout=30)
             response.raise_for_status()
 
@@ -245,23 +275,7 @@ class ImageGenerator:
         raise Exception("No output from Replicate")
 
     def _enhance_prompt_for_realism(self, prompt: str) -> str:
-        """Enhance prompt with photorealism keywords"""
-
-        # Keywords that dramatically improve realism
-        realism_keywords = [
-            "photorealistic",
-            "shot on Canon EOS R5",
-            "85mm f/1.4 lens",
-            "natural skin texture",
-            "real photography",
-            "ultra detailed",
-            "sharp focus",
-            "studio lighting",
-            "professional photography",
-            "8K resolution",
-            "lifelike",
-            "highly detailed facial features"
-        ]
+        """Enhance prompt with photorealism AND app-specific integration"""
 
         # Check if prompt already has realism keywords
         if not any(kw.lower() in prompt.lower() for kw in ["photorealistic", "photography", "canon", "shot on"]):
@@ -271,11 +285,37 @@ class ImageGenerator:
         # Add natural skin texture emphasis for people
         if any(word in prompt.lower() for word in ["person", "woman", "man", "athlete", "people", "trainer"]):
             if "skin" not in prompt.lower():
-                prompt = f"{prompt}, natural skin texture, realistic pores and details"
+                prompt = f"{prompt}, natural skin texture, realistic pores and details, visible sweat from real workout"
+
+        # CRITICAL: Make app integration more specific and realistic
+        if "trainerapp" in prompt.lower() or "app" in prompt.lower():
+            # Replace generic app mentions with specific, realistic integration
+            if "phone screen" not in prompt.lower() and "phone" in prompt.lower():
+                # Add specific UI elements that should be visible
+                app_details = [
+                    "iPhone in hand showing TrainerApp.AI interface with visible workout timer and rep counter",
+                    "looking at phone screen displaying current exercise GIF and form tips",
+                    "real TrainerApp.AI mobile app UI clearly visible on screen",
+                    "checking workout progress on TrainerApp.AI app mid-set",
+                    "following AI coach instructions shown on phone screen"
+                ]
+                # Pick one based on context
+                if "check" in prompt.lower() or "looking" in prompt.lower():
+                    prompt = f"{prompt}, {app_details[1]}"
+                else:
+                    prompt = f"{prompt}, {app_details[0]}"
+
+        # Add real gym equipment and environment details
+        if "gym" in prompt.lower() and "equipment" not in prompt.lower():
+            prompt = f"{prompt}, real gym environment with dumbbells and weight racks visible in background"
+
+        # Make it explicitly NOT stock photo
+        if "stock" not in prompt.lower():
+            prompt = f"{prompt}, NOT stock photography, NOT posed, candid authentic moment"
 
         # Ensure we specify NOT to be digital art/illustration
-        if "not" not in prompt.lower():
-            prompt = f"{prompt}, NOT digital art, NOT illustration, NOT painting, NOT anime"
+        if "not digital" not in prompt.lower():
+            prompt = f"{prompt}, NOT digital art, NOT illustration, NOT painting, NOT anime, NOT rendered"
 
         return prompt
 

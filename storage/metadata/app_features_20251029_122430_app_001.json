@@ -1,0 +1,23 @@
+{
+  "prompt": "A young South Asian woman in her 20s, in a bright gym setting, excitedly interacts with the AI Trainer feature on her smartphone. The app screen shows a personalized workout plan while she performs a set of squats. Bright lighting highlights her focus and determination, capturing her in a dynamic framing that emphasizes both her movement and the app's interface.",
+  "variant_id": "app_001",
+  "content_angle": "Step-by-step demonstrations",
+  "diversity_attributes": {
+    "body_type": "athletic",
+    "ethnicity": "South Asian",
+    "age_range": "20-29",
+    "gender": "female"
+  },
+  "platform": "both",
+  "estimated_virality": "high",
+  "tags": [
+    "AITrainer",
+    "FitnessGoals"
+  ],
+  "text_overlay": "Transform your workout with personalized plans!",
+  "theme": "app_features",
+  "content_type": "image",
+  "provider": "replicate_dev",
+  "size": "1080x1080",
+  "saved_at": "2025-10-29T12:24:30.366399"
+}

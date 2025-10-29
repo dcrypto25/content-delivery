@@ -1,0 +1,23 @@
+{
+  "prompt": "An older Black male in his 50s, outdoors in a sunny park, is seen analyzing his meals using the AI Nutritionist feature on his tablet. He smiles as he reviews the meal plan adjustment suggestions. The composition captures him surrounded by trees and a jogging path, with bright natural lighting enhancing the positive atmosphere.",
+  "variant_id": "app_002",
+  "content_angle": "Real-life testimonials",
+  "diversity_attributes": {
+    "body_type": "average",
+    "ethnicity": "Black",
+    "age_range": "50-59",
+    "gender": "male"
+  },
+  "platform": "instagram",
+  "estimated_virality": "medium",
+  "tags": [
+    "AINutritionist",
+    "HealthyEating"
+  ],
+  "text_overlay": "Fuel your fitness journey with smart nutrition!",
+  "theme": "app_features",
+  "content_type": "image",
+  "provider": "replicate_dev",
+  "size": "1080x1080",
+  "saved_at": "2025-10-29T12:24:34.097146"
+}

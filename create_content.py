@@ -12,6 +12,7 @@ sys.path.append(str(Path(__file__).parent / "scripts"))
 
 from input_processor import InputProcessor
 from generators.image_generator import ImageGenerator
+from generators.video_generator import VideoGenerator
 from utils import console
 
 
@@ -108,9 +109,18 @@ QUALITY LEVELS (use --quality):
                        choices=['workout', 'nutrition', 'motivation', 'app_features'],
                        help='🏷️  Override theme detection')
 
+    # Content type
+    parser.add_argument('--type', type=str, default='image',
+                       choices=['image', 'video', 'both'],
+                       help='🎬 Content type to generate (default: image)')
+
+    # Video-specific options
+    parser.add_argument('--duration', type=int, default=5,
+                       help='⏱️  Video duration in seconds (default: 5)')
+
     # Skip generation (just create prompts)
     parser.add_argument('--prompts-only', action='store_true',
-                       help='📝 Only generate prompts, don\'t create images')
+                       help='📝 Only generate prompts, don\'t create content')
 
     args = parser.parse_args()
 
@@ -148,27 +158,60 @@ QUALITY LEVELS (use --quality):
         theme=args.theme
     )
 
-    # Step 2: Generate images
+    # Step 2: Generate content (images and/or videos)
     if not args.prompts_only:
-        console.print("\n[bold]STEP 2: Generating Images[/bold]")
+        console.print("\n[bold]STEP 2: Generating Content[/bold]")
 
-        generator = ImageGenerator(provider=provider)
+        generated_paths = []
+        total_cost = 0
 
-        generated_paths = generator.generate_batch(output['prompts'])
+        # Generate images
+        if args.type in ['image', 'both']:
+            console.print(f"\n[cyan]🖼️  Generating images...[/cyan]")
+
+            image_generator = ImageGenerator(provider=provider)
+            image_paths = image_generator.generate_batch(output['prompts'])
+
+            generated_paths.extend(image_paths)
+            total_cost += len(image_paths) * image_generator.PROVIDER_COSTS.get(provider, 0)
+
+            console.print(f"[green]✓[/green] Generated {len(image_paths)} images")
+
+        # Generate videos
+        if args.type in ['video', 'both']:
+            console.print(f"\n[cyan]🎬 Generating videos...[/cyan]")
+            console.print(f"[yellow]⚠️  Videos take 1-3 minutes each[/yellow]")
+
+            video_generator = VideoGenerator(provider='replicate_minimax')
+
+            # Add duration to prompts
+            for prompt in output['prompts']:
+                prompt['duration'] = args.duration
+
+            video_paths = video_generator.generate_batch(output['prompts'])
+
+            generated_paths.extend(video_paths)
+            total_cost += len(video_paths) * video_generator.PROVIDER_COSTS.get('replicate_minimax', 0) * args.duration
+
+            console.print(f"[green]✓[/green] Generated {len(video_paths)} videos")
 
         # Print summary
         console.print("\n" + "━" * 60)
         console.print("[bold green]✅ SUCCESS![/bold green]\n")
-        console.print(f"📊 Generated: {len(generated_paths)} images")
-        console.print(f"💰 Cost: ${len(generated_paths) * generator.PROVIDER_COSTS.get(provider, 0):.2f}")
-        console.print(f"📁 Location: storage/generated/images/")
-
-        # Performance summary
-        generator.tracker.print_summary()
+        console.print(f"📊 Generated: {len(generated_paths)} items")
+        console.print(f"💰 Total Cost: ${total_cost:.2f}")
+        console.print(f"📁 Location: storage/generated/")
 
         # Open folder
         import os
-        os.system(f"open {generator.file_manager.storage_path / 'generated' / 'images'}")
+        if args.type == 'image':
+            folder = image_generator.file_manager.storage_path / 'generated' / 'images'
+        elif args.type == 'video':
+            folder = video_generator.file_manager.storage_path / 'generated' / 'videos'
+        else:  # both
+            folder = image_generator.file_manager.storage_path / 'generated'
+
+        os.system(f"open {folder}")
 
     else:
         console.print("\n" + "━" * 60)

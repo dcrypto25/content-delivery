@@ -1,0 +1,23 @@
+{
+  "prompt": "A cheerful White male in his 40s jogging on a trail during early morning, checking his progress via the Gym Buddy feature. The sun is just rising, casting a golden hue over the path. His expression conveys determination, showcasing the integration of technology and fitness seamlessly.",
+  "variant_id": "app_005",
+  "content_angle": "Real-life testimonials",
+  "diversity_attributes": {
+    "body_type": "athletic",
+    "ethnicity": "White",
+    "age_range": "40-49",
+    "gender": "male"
+  },
+  "platform": "tiktok",
+  "estimated_virality": "high",
+  "tags": [
+    "RunningWithAI",
+    "MorningMotivation"
+  ],
+  "text_overlay": "Every step counts \u2013 partner with AI for your best run!",
+  "theme": "app_features",
+  "content_type": "image",
+  "provider": "replicate_dev",
+  "size": "1080x1920",
+  "saved_at": "2025-10-29T12:24:40.280811"
+}

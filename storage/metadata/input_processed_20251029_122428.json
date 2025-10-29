@@ -1,0 +1,174 @@
+{
+  "input_file": "./storage/raw_inputs/test_features.png",
+  "user_description": "Create workout motivation content demonstrating specific features as listed in this image. Show users performing these actions and make sure it includes trAIner",
+  "style": "similar",
+  "vision_analysis": {
+    "scene": "A digital poster with a dark background divided into three sections featuring text describing features of a fitness app.",
+    "subject": "No individual people are depicted.",
+    "action": "Promoting features of a fitness app tool.",
+    "emotion": "Energetic and motivational, inviting users to try the features.",
+    "ui_elements": "The sections resemble app features laid out with typical UI icons indicating AI Trainer, AI Nutritionist, and Gym Buddy.",
+    "text_overlay": [
+      "Your AI Trainer, Nutritionist, Gym Buddy, and More",
+      "The only fitness app with AI that actually does everything",
+      "AI Trainer",
+      "Generate custom workout programs in seconds",
+      "50+ proven programs (PPL, nSuns, 5/3/1, PHAT)",
+      "AI physique scan & body analysis",
+      "Personalized exercise recommendations",
+      "AI form review from your videos",
+      "161+ exercises with detailed explanations",
+      "Video breakdown for every exercise",
+      "Track every set, rep, and PR",
+      "AI Nutritionist",
+      "Automatic calorie & macro calculations personalized to YOU",
+      "AI-generated meal plans tailored to your goals",
+      "Snap a photo - AI analyzes macros instantly",
+      "380,000+ foods database + barcode scanning",
+      "Create custom foods & save favorite meals",
+      "Real-time macro tracking with visual progress",
+      "Water intake & weight tracking with trends",
+      "Gym Buddy",
+      "Exhaustive exercise library - try something new today",
+      "\"Hype Me Up\" AI motivation coach and friend",
+      "Choose stern or empathetic coaching style"
+    ],
+    "lighting": "Bright and clear to ensure text readability on a dark background.",
+    "colors": [
+      "Dark blue background",
+      "Light blue for AI Trainer section",
+      "Green for AI Nutritionist section",
+      "Orange for Gym Buddy section",
+      "White text for main title and other descriptions"
+    ],
+    "style": "Modern digital marketing with clear and structured layout, focused on readability and attractiveness.",
+    "fitness_category": "tech"
+  },
+  "content_brief": {
+    "core_message": "Empower users to transform their fitness journey with the ultimate AI-driven app that provides personalized training, nutrition, and motivation.",
+    "visual_style": "Modern digital marketing with vibrant colors and clear, engaging layouts, focused on showcasing dynamic workouts and real-time app features.",
+    "key_elements": [
+      "Users actively engaging with the app's features, such as generating workout plans, analyzing meals, and receiving motivational coaching.",
+      "Visual representations of the AI Trainer, AI Nutritionist, and Gym Buddy features in action."
+    ],
+    "elements_to_avoid": [
+      "Static images or clips without user interaction.",
+      "Overly cluttered visuals that detract from the main features being promoted."
+    ],
+    "target_audience": "Fitness enthusiasts ranging from beginners to advanced users who are tech-savvy and seek personalized fitness solutions.",
+    "emotional_tone": "Energetic, motivational, and supportive, inviting users to take charge of their fitness journey with the app.",
+    "content_angles": [
+      "Real-life testimonials of users achieving their fitness goals with the app's features.",
+      "Step-by-step demonstrations showing how to utilize the AI Trainer, AI Nutritionist, and Gym Buddy for maximum results."
+    ],
+    "technical_specs": {
+      "lighting": "Bright and clear to enhance visibility of app features and user engagement.",
+      "composition": "Dynamic framing to capture users in action, with close-ups on app interactions and wide shots to show overall engagement."
+    },
+    "theme": "app_features"
+  },
+  "prompts": [
+    {
+      "prompt": "A young South Asian woman in her 20s, in a bright gym setting, excitedly interacts with the AI Trainer feature on her smartphone. The app screen shows a personalized workout plan while she performs a set of squats. Bright lighting highlights her focus and determination, capturing her in a dynamic framing that emphasizes both her movement and the app's interface.",
+      "variant_id": "app_001",
+      "content_angle": "Step-by-step demonstrations",
+      "diversity_attributes": {
+        "body_type": "athletic",
+        "ethnicity": "South Asian",
+        "age_range": "20-29",
+        "gender": "female"
+      },
+      "platform": "both",
+      "estimated_virality": "high",
+      "tags": [
+        "AITrainer",
+        "FitnessGoals"
+      ],
+      "text_overlay": "Transform your workout with personalized plans!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "An older Black male in his 50s, outdoors in a sunny park, is seen analyzing his meals using the AI Nutritionist feature on his tablet. He smiles as he reviews the meal plan adjustment suggestions. The composition captures him surrounded by trees and a jogging path, with bright natural lighting enhancing the positive atmosphere.",
+      "variant_id": "app_002",
+      "content_angle": "Real-life testimonials",
+      "diversity_attributes": {
+        "body_type": "average",
+        "ethnicity": "Black",
+        "age_range": "50-59",
+        "gender": "male"
+      },
+      "platform": "instagram",
+      "estimated_virality": "medium",
+      "tags": [
+        "AINutritionist",
+        "HealthyEating"
+      ],
+      "text_overlay": "Fuel your fitness journey with smart nutrition!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "A mixed-ethnicity group of friends (2 men and 1 woman, ages 30-40) at a vibrant beach workout session. They are seen encouraging each other while checking their live stats with the Gym Buddy feature on their phones. The scene is filled with the warm glow of the setting sun, capturing their camaraderie and energy.",
+      "variant_id": "app_003",
+      "content_angle": "Step-by-step demonstrations",
+      "diversity_attributes": {
+        "body_type": "varied",
+        "ethnicity": "Mixed",
+        "age_range": "30-40",
+        "gender": "male and female"
+      },
+      "platform": "tiktok",
+      "estimated_virality": "high",
+      "tags": [
+        "GymBuddy",
+        "WorkoutTogether"
+      ],
+      "text_overlay": "Together we achieve more \u2013 let's get fitter!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "A fit Latina woman in her late 20s performing a yoga pose in a modern, brightly-lit studio, while using the AI Trainer app to guide her. The app is displayed on her tablet, showing a rotating 3D model of her poses. A close-up shot captures her concentration and the sleek design of the app interface.",
+      "variant_id": "app_004",
+      "content_angle": "Step-by-step demonstrations",
+      "diversity_attributes": {
+        "body_type": "slim",
+        "ethnicity": "Latina",
+        "age_range": "25-29",
+        "gender": "female"
+      },
+      "platform": "both",
+      "estimated_virality": "medium",
+      "tags": [
+        "YogaWithAI",
+        "MindfulMovement"
+      ],
+      "text_overlay": "Find your balance with personalized guidance!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "A cheerful White male in his 40s jogging on a trail during early morning, checking his progress via the Gym Buddy feature. The sun is just rising, casting a golden hue over the path. His expression conveys determination, showcasing the integration of technology and fitness seamlessly.",
+      "variant_id": "app_005",
+      "content_angle": "Real-life testimonials",
+      "diversity_attributes": {
+        "body_type": "athletic",
+        "ethnicity": "White",
+        "age_range": "40-49",
+        "gender": "male"
+      },
+      "platform": "tiktok",
+      "estimated_virality": "high",
+      "tags": [
+        "RunningWithAI",
+        "MorningMotivation"
+      ],
+      "text_overlay": "Every step counts \u2013 partner with AI for your best run!",
+      "theme": "app_features",
+      "content_type": "image"
+    }
+  ],
+  "quantity": 5,
+  "timestamp": "2025-10-29T12:24:28.035461"
+}

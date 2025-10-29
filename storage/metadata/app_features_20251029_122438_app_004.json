@@ -1,0 +1,23 @@
+{
+  "prompt": "A fit Latina woman in her late 20s performing a yoga pose in a modern, brightly-lit studio, while using the AI Trainer app to guide her. The app is displayed on her tablet, showing a rotating 3D model of her poses. A close-up shot captures her concentration and the sleek design of the app interface.",
+  "variant_id": "app_004",
+  "content_angle": "Step-by-step demonstrations",
+  "diversity_attributes": {
+    "body_type": "slim",
+    "ethnicity": "Latina",
+    "age_range": "25-29",
+    "gender": "female"
+  },
+  "platform": "both",
+  "estimated_virality": "medium",
+  "tags": [
+    "YogaWithAI",
+    "MindfulMovement"
+  ],
+  "text_overlay": "Find your balance with personalized guidance!",
+  "theme": "app_features",
+  "content_type": "image",
+  "provider": "replicate_dev",
+  "size": "1080x1080",
+  "saved_at": "2025-10-29T12:24:38.114125"
+}

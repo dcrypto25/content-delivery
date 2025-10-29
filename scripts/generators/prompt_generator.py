@@ -219,15 +219,21 @@ Create {quantity} variations that maintain the core appeal while introducing div
         if not any(kw in prompt_obj['prompt'].lower() for kw in ['quality', 'resolution', 'professional']):
             prompt_obj['prompt'] += f", {random.choice(quality_keywords)}"
 
-        # Add app integration if not present
+        # ENHANCED: Add SPECIFIC app integration (not generic stock photo style)
         if 'trainerapp' not in prompt_obj['prompt'].lower():
+            # More specific, realistic app integration scenarios
             app_elements = [
-                "phone screen showing TrainerApp.AI interface in background",
-                "TrainerApp.AI logo subtly visible on equipment",
-                "person checking TrainerApp.AI on smartwatch",
-                "app interface overlay showing workout stats"
+                "person holding iPhone showing TrainerApp.AI workout timer mid-exercise, screen clearly visible with rep counter at 8/12 and next exercise preview",
+                "athlete checking phone between sets, TrainerApp.AI app open showing form correction tips with exercise GIF playing",
+                "close-up of phone screen displaying TrainerApp.AI interface with AI coach message 'Great form! 2 more reps', phone held in sweaty hand",
+                "person following workout on TrainerApp.AI app, phone propped against water bottle showing current set progress and rest timer",
+                "checking TrainerApp.AI on phone screen mid-workout, visible UI showing heart rate graph and calorie burn counter"
             ]
             prompt_obj['prompt'] += f", {random.choice(app_elements)}"
+
+        # Add anti-stock-photo keywords
+        if 'authentic' not in prompt_obj['prompt'].lower():
+            prompt_obj['prompt'] += ", authentic gym moment, not staged, real sweat and effort visible"
 
         return prompt_obj
 

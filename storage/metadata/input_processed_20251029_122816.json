@@ -1,0 +1,149 @@
+{
+  "input_file": "./storage/raw_inputs/test_features.png",
+  "user_description": "Create workout motivation content demonstrating specific features as listed in this image. The image should be a very specific feature from these lists. Do not create generic ai health images. They must be performing one of these actions",
+  "style": "similar",
+  "vision_analysis": {
+    "scene": "The image is a digital interface designed as a promotional graphic for a fitness app, displayed against a solid dark background.",
+    "subject": "There are no people present in the image; it consists solely of text and graphical elements representing an app interface.",
+    "action": "The image provides information about different features offered by the fitness app using AI, targeted towards users interested in workout and nutrition.",
+    "emotion": "The mood is informative and motivational, aiming to engage and inspire users to utilize the app's features.",
+    "ui_elements": "The interface is divided into three sections: 'AI Trainer' (blue), 'AI Nutritionist' (green), and 'Gym Buddy' (orange), each highlighting specific features and functionalities.",
+    "text_overlay": "The text includes:\n- 'Your AI Trainer, Nutritionist, Gym Buddy, and More'\n- Descriptions of features under the three sections with symbols for emphasis.",
+    "lighting": "The lighting is consistent and flat, typical of digital graphics without any specific lighting effects.",
+    "colors": "Dominant colors include dark blue, blue, green, and orange, used to differentiate between sections.",
+    "style": "The style is modern and clean, utilizing flat design principles typical of app promotional materials.",
+    "fitness_category": "The image fits into multiple categories: workout, nutrition, and motivation, as it highlights features related to each."
+  },
+  "content_brief": {
+    "core_message": "Unlock your fitness potential with personalized guidance from your AI Trainer, Nutritionist, and Gym Buddy, all within one powerful app.",
+    "visual_style": "Modern and clean flat design, similar to the input, utilizing a dark background with vibrant section colors (blue, green, orange) to highlight features.",
+    "key_elements": [
+      "Dynamic illustrations or icons representing the AI Trainer, Nutritionist, and Gym Buddy functionalities.",
+      "Clear, concise text overlays that explain each feature's benefits."
+    ],
+    "elements_to_avoid": [
+      "Generic health imagery without specific feature representation.",
+      "Overly complex graphics that detract from the app's usability."
+    ],
+    "target_audience": "Fitness enthusiasts and beginners who are tech-savvy and looking for personalized workout and nutrition guidance through an app.",
+    "emotional_tone": "Motivational and engaging, designed to inspire confidence and excitement about utilizing the app's capabilities.",
+    "content_angles": [
+      "Showcase a specific feature of the AI Trainer, such as a personalized workout plan based on user goals.",
+      "Highlight the AI Nutritionist's meal planning feature, demonstrating how it tailors nutrition advice to individual preferences and dietary restrictions."
+    ],
+    "technical_specs": {
+      "lighting": "Consistent, flat lighting with no shadows for a clean digital look.",
+      "composition": "Balanced layout with three distinct sections for each feature, ensuring easy readability and visual appeal."
+    },
+    "theme": "app_features"
+  },
+  "prompts": [
+    {
+      "prompt": "A fit young Black woman, wearing vibrant workout gear, standing in a bright, modern kitchen, enthusiastically planning her meals on a tablet. The screen shows the app's AI Nutritionist feature suggesting recipes tailored to her vegan diet. The background is clean and white, contrasting with the colorful meal prep items scattered on the counter. The lighting is bright and inviting.",
+      "variant_id": "app_001",
+      "content_angle": "Highlight the AI Nutritionist's meal planning feature.",
+      "diversity_attributes": {
+        "body_type": "athletic",
+        "ethnicity": "Black",
+        "age_range": "25-35",
+        "gender": "female"
+      },
+      "platform": "instagram",
+      "estimated_virality": "medium",
+      "tags": [
+        "mealplanning",
+        "vegan",
+        "fitnessapp"
+      ],
+      "text_overlay": "Fuel your journey with tailored nutrition!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "An athletic Hispanic male in his early 30s, performing a dynamic workout with a resistance band in a sleek home gym. The app's AI Trainer feature on his smartphone displays a customized workout plan with real-time progress updates. The gym has a modern feel with a dark background and vibrant light accents.",
+      "variant_id": "app_002",
+      "content_angle": "Showcase a specific feature of the AI Trainer.",
+      "diversity_attributes": {
+        "body_type": "muscular",
+        "ethnicity": "Hispanic",
+        "age_range": "30-40",
+        "gender": "male"
+      },
+      "platform": "tiktok",
+      "estimated_virality": "high",
+      "tags": [
+        "homeworkout",
+        "AIFitness",
+        "personaltrainer"
+      ],
+      "text_overlay": "Unlock your strength, one rep at a time!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "A cheerful South Asian woman in her late 20s, jogging in a scenic park during sunrise, with her smartphone visibly tracking her stats through the app. The app shows the Gym Buddy feature connecting her with friends for motivation. The soft morning light creates a warm atmosphere, highlighting her determination.",
+      "variant_id": "app_003",
+      "content_angle": "Integrate the Gym Buddy feature's social aspect.",
+      "diversity_attributes": {
+        "body_type": "slim",
+        "ethnicity": "South Asian",
+        "age_range": "20-30",
+        "gender": "female"
+      },
+      "platform": "both",
+      "estimated_virality": "medium",
+      "tags": [
+        "jogging",
+        "fitnessmotivation",
+        "community"
+      ],
+      "text_overlay": "Together we achieve more!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "An energetic middle-aged Caucasian man, cycling in a vibrant urban environment, confidently checking his performance stats on the app. The AI Trainer's coaching prompts are visible on the screen, offering real-time feedback. The city skyline provides a dynamic backdrop, with bright lighting showcasing his enthusiasm.",
+      "variant_id": "app_004",
+      "content_angle": "Focus on the AI Trainer's coaching in real-time.",
+      "diversity_attributes": {
+        "body_type": "average",
+        "ethnicity": "Caucasian",
+        "age_range": "40-50",
+        "gender": "male"
+      },
+      "platform": "instagram",
+      "estimated_virality": "medium",
+      "tags": [
+        "cycling",
+        "activeaging",
+        "fitlife"
+      ],
+      "text_overlay": "Stay on track, every pedal counts!",
+      "theme": "app_features",
+      "content_type": "image"
+    },
+    {
+      "prompt": "A diverse group of fit individuals (Black, Hispanic, and Asian) in their 20s, participating in an outdoor boot camp, laughing and enjoying their workout. Each person has their phones out, using the TrainerApp.AI to access customized challenges and group stats. The setting is a vibrant park on a sunny day, with bright colors enhancing the energetic vibe.",
+      "variant_id": "app_005",
+      "content_angle": "Celebrate the community aspect of the app.",
+      "diversity_attributes": {
+        "body_type": "varied",
+        "ethnicity": "mixed",
+        "age_range": "20-30",
+        "gender": "mixed"
+      },
+      "platform": "tiktok",
+      "estimated_virality": "high",
+      "tags": [
+        "fitnesscommunity",
+        "outdoorworkout",
+        "fun"
+      ],
+      "text_overlay": "Stronger together, challenge accepted!",
+      "theme": "app_features",
+      "content_type": "image"
+    }
+  ],
+  "quantity": 5,
+  "timestamp": "2025-10-29T12:28:16.584385"
+}
